@@ -45,10 +45,10 @@ Read End | Write End"]
     PIPE -->|stdin| CP2
     CP2 -->|stdout| OF
     
-    PP -.->|fork()| CP1
-    PP -.->|fork()| CP2
-    PP -.->|wait()| CP1
-    PP -.->|wait()| CP2
+    PP -.->|"fork()"| CP1
+    PP -.->|"fork()"| CP2
+    PP -.->|"wait()"| CP1
+    PP -.->|"wait()"| CP2
 ```
 
 ## 機能
