@@ -11,30 +11,40 @@
 Pipexは、Unixシェルのパイプ機能を再現するCプログラムです。
 2つのコマンドをパイプで繋ぎ、標準入力から標準出力への連続的な処理を行います。
 
-## プロジェクト構成
+## パイプ処理の仕組み
 
 ```mermaid
-graph TB
-    A[pipex] --> B[mandatory]
-    A --> C[bonus]
-    A --> D[include]
+graph LR
+    subgraph "Input/Output"
+        IF[Input File]
+        OF[Output File]
+    end
     
-    B --> B1[main.c]
-    B --> B2[pipex.c]
-    B --> B3[ft_split.c]
-    B --> B4[make_path.c]
-    B --> B5[utils.c]
-    B --> B6[utils2.c]
+    subgraph "Parent Process"
+        PP[Parent Process<br/>./pipex]
+    end
     
-    C --> C1[main_bonus.c]
-    C --> C2[pipex_bonus.c]
-    C --> C3[ft_split_bonus.c]
-    C --> C4[make_path_bonus.c]
-    C --> C5[utils_bonus.c]
-    C --> C6[utils2_bonus.c]
+    subgraph "Child Process 1"
+        CP1[Child Process 1<br/>cmd1]
+    end
     
-    D --> D1[pipex.h]
-    D --> D2[pipex_bonus.h]
+    subgraph "Child Process 2"
+        CP2[Child Process 2<br/>cmd2]
+    end
+    
+    subgraph "Pipe"
+        PIPE[pipe[0] | pipe[1]<br/>Read End | Write End]
+    end
+    
+    IF -->|stdin| CP1
+    CP1 -->|stdout| PIPE
+    PIPE -->|stdin| CP2
+    CP2 -->|stdout| OF
+    
+    PP -.->|fork()| CP1
+    PP -.->|fork()| CP2
+    PP -.->|wait()| CP1
+    PP -.->|wait()| CP2
 ```
 
 ## 機能
