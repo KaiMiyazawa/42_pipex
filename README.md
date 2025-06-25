@@ -21,15 +21,18 @@ graph LR
     end
     
     subgraph "Parent Process"
-        PP[Parent Process<br/>./pipex]
+        PP["Parent Process
+./pipex"]
     end
     
     subgraph "Child Process 1"
-        CP1[Child Process 1<br/>cmd1]
+        CP1["Child Process 1
+cmd1"]
     end
     
     subgraph "Child Process 2"
-        CP2[Child Process 2<br/>cmd2]
+        CP2["Child Process 2
+cmd2"]
     end
     
     subgraph "Pipe"
