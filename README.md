@@ -33,7 +33,8 @@ graph LR
     end
     
     subgraph "Pipe"
-        PIPE[pipe[0] | pipe[1]<br/>Read End | Write End]
+        PIPE["pipe[0] | pipe[1]
+Read End | Write End"]
     end
     
     IF -->|stdin| CP1
